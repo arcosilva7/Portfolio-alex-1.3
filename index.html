@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio d'Alexandre Vias, étudiant en Bachelor Développement en Intelligence Artificielle et Data à l'ECE Bordeaux.">
+  <meta name="theme-color" content="#07111f">
+  <title>Alexandre Vias | Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --background: #07111f;
+      --background-light: #0d1a2b;
+      --card: #101f32;
+      --card-hover: #142941;
+      --blue: #3b82f6;
+      --blue-light: #60a5fa;
+      --text: #f4f7fb;
+      --text-light: #aab7c7;
+      --border: rgba(148, 163, 184, .17);
+      --radius: 18px;
+      --max-width: 1120px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(92%, var(--max-width)); margin: auto; }
+    .section { padding: 90px 0; }
+    .section:nth-of-type(even) { background: rgba(255,255,255,.012); }
+    .section-heading { margin-bottom: 38px; }
+    .eyebrow {
+      display: inline-block;
+      color: var(--blue-light);
+      font-weight: 700;
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.2; }
+    .section-heading p { color: var(--text-light); margin-top: 12px; max-width: 680px; }
+    .accent { color: var(--blue-light); }
+    .muted { color: var(--text-light); }
+
+    /* Navigation */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7,17,31,.88);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+    }
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .logo { font-size: 1.25rem; font-weight: 800; letter-spacing: -.6px; }
+    .logo span { color: var(--blue-light); }
+    .nav-links { display: flex; align-items: center; gap: 23px; list-style: none; }
+    .nav-links a { color: var(--text-light); font-size: .9rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue-light); }
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 11px;
+      font-size: 1.15rem;
+      cursor: pointer;
+    }
+
+    /* Buttons and reusable cards */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 18px;
+      border-radius: 11px;
+      font-weight: 700;
+      font-size: .92rem;
+      border: 1px solid transparent;
+      transition: transform .2s, background .2s, border-color .2s;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--blue); color: white; }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-outline { border-color: var(--border); color: var(--text); background: rgba(255,255,255,.025); }
+    .btn-outline:hover { border-color: var(--blue-light); }
+    .grid { display: grid; gap: 22px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px;
+      transition: transform .22s, background .22s, border-color .22s;
+    }
+    .card:hover { transform: translateY(-5px); background: var(--card-hover); border-color: rgba(96,165,250,.42); }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+    .tag {
+      display: inline-block;
+      font-size: .78rem;
+      color: #c8ddff;
+      background: rgba(59,130,246,.12);
+      border: 1px solid rgba(96,165,250,.18);
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 82% 28%, rgba(37,99,235,.19), transparent 35%),
+        radial-gradient(ellipse at 15% 90%, rgba(14,165,233,.09), transparent 35%);
+    }
+    .hero-content { max-width: 800px; padding: 90px 0; }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(96,165,250,.25);
+      background: rgba(59,130,246,.09);
+      border-radius: 999px;
+      padding: 7px 13px;
+      color: #c8ddff;
+      font-size: .82rem;
+      margin-bottom: 24px;
+    }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 12px #4ade8070; }
+    .hero h1 { font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: -2.6px; line-height: 1.06; margin-bottom: 20px; }
+    .hero h1 span { color: var(--blue-light); }
+    .hero-subtitle { color: #d1dbe8; font-size: clamp(1.05rem, 2.3vw, 1.3rem); max-width: 740px; }
+    .hero-description { color: var(--text-light); max-width: 680px; margin: 17px 0 30px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .social-links { display: flex; gap: 17px; margin-top: 30px; }
+    .social-links a { color: var(--text-light); font-size: 1.3rem; transition: color .2s, transform .2s; }
+    .social-links a:hover { color: var(--blue-light); transform: translateY(-2px); }
+
+    /* About */
+    .about-grid { grid-template-columns: 1.2fr .8fr; align-items: stretch; }
+    .about-text p { color: var(--text-light); margin-bottom: 15px; }
+    .info-list { display: grid; gap: 14px; }
+    .info-row { display: flex; gap: 12px; align-items: flex-start; color: var(--text-light); }
+    .info-row i { color: var(--blue-light); margin-top: 5px; width: 18px; text-align: center; }
+    .info-row strong { color: var(--text); display: block; font-size: .93rem; }
+    .info-row span { font-size: .9rem; }
+
+    /* Projects */
+    .projects-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .project-icon {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border-radius: 14px; color: var(--blue-light); background: rgba(59,130,246,.13);
+      font-size: 1.35rem; margin-bottom: 18px;
+    }
+    .card h3 { font-size: 1.13rem; line-height: 1.4; margin-bottom: 10px; }
+    .card p { color: var(--text-light); font-size: .92rem; }
+    .project-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+    .text-link { color: var(--blue-light); font-size: .88rem; font-weight: 700; }
+    .text-link:hover { color: white; }
+    .text-link i { margin-left: 5px; }
+
+    /* Skills */
+    .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .skill-card h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .skill-card h3 i { color: var(--blue-light); }
+    .skill-item { margin-top: 15px; }
+    .skill-label { display: flex; justify-content: space-between; gap: 12px; font-size: .88rem; margin-bottom: 7px; }
+    .skill-label span:last-child { color: var(--text-light); font-size: .8rem; }
+    .progress { height: 7px; border-radius: 999px; background: #26364a; overflow: hidden; }
+    .progress span { display: block; height: 100%; background: linear-gradient(90deg, #2563eb, #60a5fa); border-radius: inherit; }
+
+    /* Experience and education */
+    .timeline { display: grid; gap: 18px; }
+    .timeline-item { position: relative; padding-left: 25px; }
+    .timeline-item::before { content: ""; position: absolute; left: 0; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 5px rgba(59,130,246,.12); }
+    .timeline-item::after { content: ""; position: absolute; left: 4px; top: 25px; bottom: -20px; width: 2px; background: var(--border); }
+    .timeline-item:last-child::after { display: none; }
+    .timeline-date { color: var(--blue-light); font-size: .82rem; font-weight: 700; margin-bottom: 5px; }
+    .timeline-item h3 { margin-bottom: 4px; }
+    .timeline-item p { color: var(--text-light); font-size: .91rem; }
+    .two-columns { grid-template-columns: 1fr 1fr; }
+
+    /* Certifications */
+    .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cert-card { display: flex; gap: 16px; align-items: flex-start; }
+    .cert-card .project-icon { flex: 0 0 48px; margin: 0; }
+    .cert-card h3 { font-size: 1rem; }
+    .cert-card p { font-size: .85rem; }
+
+    /* Contact and footer */
+    .contact-grid { grid-template-columns: .85fr 1.15fr; align-items: start; }
+    .contact-intro { color: var(--text-light); margin: 15px 0 25px; }
+    .contact-method { display: flex; align-items: center; gap: 13px; margin: 18px 0; }
+    .contact-method i { color: var(--blue-light); width: 22px; text-align: center; font-size: 1.15rem; }
+    .contact-method small { display: block; color: var(--text-light); }
+    .contact-method a, .contact-method span { overflow-wrap: anywhere; }
+    .contact-note { color: var(--text-light); font-size: .85rem; margin-top: 12px; }
+    .footer { padding: 25px 0; border-top: 1px solid var(--border); color: var(--text-light); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .back-top { color: var(--blue-light); }
+
+    @media (max-width: 900px) {
+      .nav-links { gap: 13px; }
+      .nav-links a { font-size: .82rem; }
+      .projects-grid, .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      .section { padding: 68px 0; }
+      .nav-inner { min-height: 66px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: 66px; left: 0; right: 0;
+        padding: 18px 4%; background: #0a1727; border-bottom: 1px solid var(--border);
+        flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { display: block; padding: 11px 0; font-size: .95rem; }
+      .hero { min-height: auto; }
+      .hero-content { padding: 80px 0; }
+      .hero h1 { letter-spacing: -1.4px; }
+      .projects-grid, .skills-grid, .two-columns, .cert-grid { grid-template-columns: 1fr; }
+      .card { padding: 21px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <nav class="container nav-inner" aria-label="Navigation principale">
+      <a class="logo" href="#accueil" aria-label="Alexandre Vias, accueil">AV<span>.</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#experience">Expériences</a></li>
+        <li><a href="#formation">Formation</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil">
+      <div class="container hero-content">
+        <div class="status"><span class="status-dot"></span> Recherche d'un stage de deuxième année</div>
+        <h1>Bonjour, moi c'est<br><span>Alexandre Vias.</span></h1>
+        <p class="hero-subtitle">Étudiant en Bachelor Développement en Intelligence Artificielle &amp; Data à l'ECE Bordeaux.</p>
+        <p class="hero-description">
+          Je m'intéresse au développement informatique, à l'intelligence artificielle et à la création d'outils utiles.
+          À travers mes projets, j'apprends en construisant et j'aime comprendre comment les choses fonctionnent.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projets"><i class="fa-solid fa-code"></i> Découvrir mes projets</a>
+          <a class="btn btn-outline" href="#contact"><i class="fa-regular fa-paper-plane"></i> Me contacter</a>
+        </div>
+        <div class="social-links" aria-label="Réseaux professionnels">
+          <a href="https://github.com/arcosilva7" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://fr.linkedin.com/in/alexandre-vias-71a1133a2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:alexvias633@gmail.com" aria-label="Envoyer un e-mail"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="apropos">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">À propos</span>
+          <h2>Un peu plus <span class="accent">sur moi</span></h2>
+        </div>
+        <div class="grid about-grid">
+          <article class="card about-text">
+            <p>
+              Je suis étudiant à l'ECE Bordeaux en Bachelor Développement en Intelligence Artificielle et Data.
+              J'aime découvrir de nouvelles technologies, expérimenter et transformer mes idées en petits projets concrets.
+            </p>
+            <p>
+              Je développe progressivement mes compétences en programmation, en développement web et en IA.
+              Je cherche aujourd'hui un stage de deuxième année pour apprendre auprès d'une équipe, participer à des projets réels
+              et gagner en expérience.
+            </p>
+            <p>
+              Je suis curieux, sérieux dans le travail et prêt à continuer d'apprendre, même lorsque je découvre un sujet.
+            </p>
+          </article>
+          <aside class="card">
+            <div class="info-list">
+              <div class="info-row"><i class="fa-solid fa-graduation-cap"></i><div><strong>Formation</strong><span>Bachelor Développement en IA &amp; Data</span></div></div>
+              <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><strong>Localisation</strong><span>Bordeaux, France</span></div></div>
+              <div class="info-row"><i class="fa-solid fa-bullseye"></i><div><strong>Objectif</strong><span>Stage de deuxième année</span></div></div>
+              <div class="info-row"><i class="fa-solid fa-laptop-code"></i><div><strong>Centres d'intérêt</strong><span>Développement, IA, Data et nouvelles technologies</span></div></div>
+              <div class="info-row"><i class="fa-solid fa-language"></i><div><strong>Langues</strong><span>Français · Anglais B2</span></div></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projets">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Réalisations</span>
+          <h2>Mes <span class="accent">projets</span></h2>
+          <p>Quelques projets personnels et scolaires sur lesquels j'ai travaillé pour mettre en pratique mes connaissances.</p>
+        </div>
+        <div class="grid projects-grid">
+          <article class="card">
+            <div class="project-icon"><i class="fa-solid fa-brain"></i></div>
+            <h3>alexAI</h3>
+            <p>Assistant personnel développé en Python. Le projet explore la gestion d'une mémoire simple à l'aide d'un fichier JSON et l'évolution progressive des réponses de l'assistant.</p>
+            <div class="tag-list"><span class="tag">Python</span><span class="tag">JSON</span><span class="tag">IA</span></div>
+            <div class="project-links">
+              <a class="text-link" href="https://photos.app.goo.gl/TwPwkB1mNtFCy8bQ9" target="_blank" rel="noopener noreferrer">Voir le projet <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a class="text-link" href="https://github.com/arcosilva7" target="_blank" rel="noopener noreferrer">GitHub <i class="fa-brands fa-github"></i></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="project-icon"><i class="fa-solid fa-utensils"></i></div>
+            <h3>ChefAI</h3>
+            <p>Application de cuisine réalisée avec Python et Streamlit, pensée pour accompagner l'utilisateur dans ses idées de recettes. Le projet m'a permis d'explorer la création d'une interface interactive et l'intégration de services d'IA.</p>
+            <div class="tag-list"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">IA</span></div>
+            <div class="project-links">
+              <a class="text-link" href="https://github.com/arcosilva7" target="_blank" rel="noopener noreferrer">Mes dépôts GitHub <i class="fa-brands fa-github"></i></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="project-icon"><i class="fa-solid fa-gamepad"></i></div>
+            <h3>Morpion Mortal Game</h3>
+            <p>Jeu de morpion avec une interface web, des parties joueur contre joueur et joueur contre ordinateur. Ce projet m'a aidé à travailler la logique du jeu et les interactions en JavaScript.</p>
+            <div class="tag-list"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+            <div class="project-links">
+              <a class="text-link" href="https://arcosilva7.github.io/JEU-DU-MORPION/" target="_blank" rel="noopener noreferrer">Jouer <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="project-icon"><i class="fa-solid fa-robot"></i></div>
+            <h3>Robot ECE Cup</h3>
+            <p>Projet d'équipe autour d'un robot utilisant une carte ESP32. Participation à la réalisation et à la programmation dans un cadre de défi technique et collaboratif.</p>
+            <div class="tag-list"><span class="tag">ESP32</span><span class="tag">C/C++</span><span class="tag">Électronique</span></div>
+            <div class="project-links">
+              <a class="text-link" href="https://photos.app.goo.gl/vaWQA6f9Y1WaNArE7" target="_blank" rel="noopener noreferrer">Voir les photos <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="project-icon"><i class="fa-solid fa-briefcase"></i></div>
+            <h3>ECE JobBoard</h3>
+            <p>Projet web de gestion d'offres et d'utilisateurs, avec une base de données relationnelle. Travail sur la structure des données et les échanges entre PHP et MySQL.</p>
+            <div class="tag-list"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">SQL</span></div>
+            <div class="project-links">
+              <a class="text-link" href="https://github.com/arcosilva7" target="_blank" rel="noopener noreferrer">Voir sur GitHub <i class="fa-brands fa-github"></i></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="project-icon"><i class="fa-solid fa-terminal"></i></div>
+            <h3>Projets en C</h3>
+            <p>Exercices et petits programmes réalisés pour renforcer mes bases en algorithmique, en programmation structurée et en résolution de problèmes.</p>
+            <div class="tag-list"><span class="tag">Langage C</span><span class="tag">Algorithmique</span></div>
+            <div class="project-links">
+              <a class="text-link" href="https://github.com/arcosilva7" target="_blank" rel="noopener noreferrer">Voir sur GitHub <i class="fa-brands fa-github"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="competences">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Savoir-faire</span>
+          <h2>Mes <span class="accent">compétences</span></h2>
+          <p>Des compétences en cours de développement, consolidées grâce aux cours et aux projets pratiques.</p>
+        </div>
+        <div class="grid skills-grid">
+          <article class="card skill-card">
+            <h3><i class="fa-solid fa-code"></i> Programmation</h3>
+            <div class="skill-item"><div class="skill-label"><span>Python</span><span>Intermédiaire débutant</span></div><div class="progress"><span style="width:58%"></span></div></div>
+            <div class="skill-item"><div class="skill-label"><span>C</span><span>Bases solides en cours d'acquisition</span></div><div class="progress"><span style="width:55%"></span></div></div>
+            <div class="skill-item"><div class="skill-label"><span>Java</span><span>Bases</span></div><div class="progress"><span style="width:35%"></span></div></div>
+            <div class="skill-item"><div class="skill-label"><span>Algorithmique</span><span>Bases</span></div><div class="progress"><span style="width:55%"></span></div></div>
+          </article>
+          <article class="card skill-card">
+            <h3><i class="fa-solid fa-globe"></i> Web &amp; données</h3>
+            <div class="skill-item"><div class="skill-label"><span>HTML / CSS</span><span>Pratique</span></div><div class="progress"><span style="width:70%"></span></div></div>
+            <div class="skill-item"><div class="skill-label"><span>JavaScript</span><span>Bases</span></div><div class="progress"><span style="width:48%"></span></div></div>
+            <div class="skill-item"><div class="skill-label"><span>PHP / MySQL</span><span>Bases</span></div><div class="progress"><span style="width:43%"></span></div></div>
+            <div class="skill-item"><div class="skill-label"><span>SQL</span><span>Bases</span></div><div class="progress"><span style="width:45%"></span></div></div>
+          </article>
+          <article class="card skill-card">
+            <h3><i class="fa-solid fa-microchip"></i> Outils &amp; systèmes</h3>
+            <div class="skill-item"><div class="skill-label"><span>Linux</span><span>Bases</span></div><div class="progress"><span style="width:48%"></span></div></div>
+            <div class="skill-item"><div class="skill-label"><span>Git / GitHub</span><span>Pratique</span></div><div class="progress"><span style="width:52%"></span></div></div>
+            <div class="skill-item"><div class="skill-label"><span>Streamlit</span><span>Bases</span></div><div class="progress"><span style="width:42%"></span></div></div>
+            <div class="skill-item"><div class="skill-label"><span>ESP32 / Arduino</span><span>Notions</span></div><div class="progress"><span style="width:35%"></span></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Parcours</span>
+          <h2>Mes <span class="accent">expériences</span></h2>
+        </div>
+        <div class="grid two-columns">
+          <article class="card">
+            <h3 style="margin-bottom:22px"><i class="fa-solid fa-briefcase accent"></i> Expériences professionnelles</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">Août 2026 – Aujourd'hui</div>
+                <h3>Agent d'hôtel · WILAU</h3>
+                <p>Expérience professionnelle dans le secteur hôtelier, avec le respect des consignes, le sens du service et le travail en équipe.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Décembre 2025 et avril 2026</div>
+                <h3>Bénévole · AREMAS</h3>
+                <p>Participation à des activités de tri et de recyclage des déchets, dans une démarche collective et environnementale.</p>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <h3 style="margin-bottom:22px"><i class="fa-solid fa-laptop-code accent"></i> Projets personnels</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">2026</div>
+                <h3>Développement de projets informatiques</h3>
+                <p>Création et amélioration de projets comme alexAI, ChefAI et Morpion Mortal Game afin de pratiquer la programmation et le développement d'interfaces.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">En continu</div>
+                <h3>Apprentissage autonome</h3>
+                <p>Découverte de nouveaux outils, résolution de problèmes et consolidation des bases en informatique au fil des cours et des projets.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="formation">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Études</span>
+          <h2>Ma <span class="accent">formation</span></h2>
+        </div>
+        <div class="grid two-columns">
+          <article class="card">
+            <div class="project-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="timeline-date">2025 – 2027</div>
+            <h3>ECE Bordeaux</h3>
+            <p>Bachelor Développement en Intelligence Artificielle &amp; Data</p>
+            <div class="tag-list"><span class="tag">Développement</span><span class="tag">Intelligence artificielle</span><span class="tag">Data</span></div>
+          </article>
+          <article class="card">
+            <div class="project-icon"><i class="fa-solid fa-book-open"></i></div>
+            <div class="timeline-date">2025</div>
+            <h3>Baccalauréat scientifique</h3>
+            <p>Lycée Sagbado · Togo</p>
+            <div class="tag-list"><span class="tag">Mention Assez Bien</span><span class="tag">Sciences</span><span class="tag">Mathématiques</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="certifications">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Apprentissage continu</span>
+          <h2>Mes <span class="accent">certifications</span></h2>
+        </div>
+        <div class="grid cert-grid">
+          <article class="card cert-card">
+            <div class="project-icon"><i class="fa-solid fa-certificate"></i></div>
+            <div>
+              <h3>IA &amp; GenAI - Prompt Engineering Niveau 1 certification (FR)</h3>
+              <p>Organisme : Liora</p>
+            </div>
+          </article>
+          <article class="card cert-card">
+            <div class="project-icon"><i class="fa-solid fa-table"></i></div>
+            <div>
+              <h3>Google Sheets - No Code - TechAway niv1 (FR)</h3>
+              <p>Organisme : Liora</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Échangeons</span>
+          <h2>Me <span class="accent">contacter</span></h2>
+        </div>
+        <div class="grid contact-grid">
+          <div>
+            <p class="contact-intro">Vous avez une opportunité de stage, un projet ou simplement envie d'échanger ? Vous pouvez me contacter par e-mail ou via mes profils professionnels.</p>
+            <div class="contact-method">
+              <i class="fa-regular fa-envelope"></i>
+              <div><small>E-mail</small><a href="mailto:alexvias633@gmail.com">alexvias633@gmail.com</a></div>
+            </div>
+            <div class="contact-method">
+              <i class="fa-brands fa-github"></i>
+              <div><small>GitHub</small><a href="https://github.com/arcosilva7" target="_blank" rel="noopener noreferrer">github.com/arcosilva7</a></div>
+            </div>
+            <div class="contact-method">
+              <i class="fa-brands fa-linkedin"></i>
+              <div><small>LinkedIn</small><a href="https://fr.linkedin.com/in/alexandre-vias-71a1133a2/" target="_blank" rel="noopener noreferrer">Mon profil LinkedIn</a></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>À la recherche d'un stage</h3>
+            <p>Je souhaite rejoindre une équipe où je pourrai mettre en pratique mes connaissances, découvrir le fonctionnement de projets professionnels et progresser en développement informatique, IA ou Data.</p>
+            <div style="margin-top:22px">
+              <a class="btn btn-primary" href="mailto:alexvias633@gmail.com?subject=Opportunit%C3%A9%20de%20stage"><i class="fa-solid fa-paper-plane"></i> Me proposer une opportunité</a>
+            </div>
+            <p class="contact-note">Pour un CV ou des informations complémentaires, n'hésitez pas à m'écrire.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Alexandre Vias. Tous droits réservés.</p>
+      <a class="back-top" href="#accueil">Retour en haut ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+      menuToggle.innerHTML = isOpen
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+        menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const sections = document.querySelectorAll("main section[id]");
+    const navItems = document.querySelectorAll(".nav-links a");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navItems.forEach(item => {
+            item.classList.toggle("active", item.getAttribute("href") === `#${entry.target.id}`);
+          });
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
